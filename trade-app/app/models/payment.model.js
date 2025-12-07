@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const Payment = sequelize.define("payment", {
-    orderNumber: { type: Sequelize.STRING },
+    orderNumber: { type: Sequelize.INTEGER },
     paymentNumber: { type: Sequelize.STRING },
     paymentDate: { type: Sequelize.DATE },
     amount: { type: Sequelize.DECIMAL },

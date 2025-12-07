@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const Brand = sequelize.define("brand", {
-    brandCode: { type: Sequelize.STRING },
+    brandCode: { type: Sequelize.INTEGER, },
     name: { type: Sequelize.STRING }
   });
 

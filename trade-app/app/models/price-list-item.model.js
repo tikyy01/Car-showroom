@@ -1,7 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
   const PriceListItem = sequelize.define("priceListItem", {
-    vin: { type: Sequelize.STRING },
-    priceListNumber: { type: Sequelize.STRING },
+    vin: { type: Sequelize.INTEGER, },
+    priceListNumber: { type: Sequelize.INTEGER },
     price: { type: Sequelize.DECIMAL },
     discountPrice: { type: Sequelize.DECIMAL }
   });
