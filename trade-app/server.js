@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
 
 const app = express();
 
@@ -25,10 +27,31 @@ app.get("/", (req, res) => {
 });
 require("dotenv").config();
 
-
-
 const PORT = process.env.PORT || 8080;
-require("./trade-app/app/routes/automobile.routes.js")(app);
+
+// Swagger setup
+const swaggerOptions = {
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Car Showroom API",
+      version: "1.0.0",
+      description: "API documentation for Car Showroom application"
+    },
+    servers: [
+      {
+        url: `http://localhost:6868`,
+        description: "Development server"
+      }
+    ]
+  },
+  apis: ["./app/routes/*.routes.js"]
+};
+
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+require("./app/routes/automobile.routes.js")(app);
 require("./app/routes/brand.routes.js")(app);
 require("./app/routes/client.routes.js")(app);
 require("./app/routes/delivery.routes.js")(app);
@@ -38,6 +61,7 @@ require("./app/routes/order-item.routes.js")(app);
 require("./app/routes/payment.routes.js")(app);
 require("./app/routes/price-list.routes.js")(app);
 require("./app/routes/price-list-item.routes.js")(app);
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

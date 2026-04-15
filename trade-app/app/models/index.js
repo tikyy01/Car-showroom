@@ -10,6 +10,11 @@ const sequelize = new Sequelize(
     dialect: dbConfig.dialect,
     port: dbConfig.port,
     operatorsAliases: false,
+     define: {
+      underscored: true, 
+      createdAt: 'created_at',
+      updatedAt: 'updated_at'
+    },
     pool: {
       max: dbConfig.pool.max,
       min: dbConfig.pool.min,
@@ -35,7 +40,7 @@ db.delivery = require("./delivery.model.js")(sequelize, Sequelize);
 db.priceList = require("./price-list.model.js")(sequelize, Sequelize);
 db.priceListItem = require("./price-list-item.model.js")(sequelize, Sequelize);
 
-
+// Ассоциации (связи между таблицами)
 db.client.hasMany(db.order, { foreignKey: "clientCode" });
 db.order.belongsTo(db.client, { foreignKey: "clientCode" });
 
@@ -51,8 +56,8 @@ db.orderItem.belongsTo(db.automobile, { foreignKey: "vin" });
 db.brand.hasMany(db.model, { foreignKey: "brandCode" });
 db.model.belongsTo(db.brand, { foreignKey: "brandCode" });
 
-db.model.hasMany(db.automobile, { foreignKey: "modelCode" });
-db.automobile.belongsTo(db.model, { foreignKey: "modelCode" });
+db.model.hasMany(db.automobile, { foreignKey: "modelId" });
+db.automobile.belongsTo(db.model, { foreignKey: "modelId" });
 
 db.order.hasMany(db.delivery, { foreignKey: "orderNumber" });
 db.delivery.belongsTo(db.order, { foreignKey: "orderNumber" });
@@ -66,5 +71,12 @@ db.priceListItem.belongsTo(db.priceList, { foreignKey: "priceListNumber" });
 db.automobile.hasMany(db.priceListItem, { foreignKey: "vin" });
 db.priceListItem.belongsTo(db.automobile, { foreignKey: "vin" });
 
-
+// СИНХРОНИЗАЦИЯ БАЗЫ ДАННЫХ (ДОБАВЛЕННЫЙ БЛОК)
+db.sequelize.sync({ alter: true })
+  .then(() => {
+    console.log("✓ Database synchronized successfully");
+  })
+  .catch((err) => {
+    console.error("✗ Database sync failed:", err.message);
+  });
 module.exports = db;

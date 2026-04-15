@@ -1,6 +1,14 @@
-FROM node:18.18-alpine
+FROM node:18-alpine
+
 WORKDIR /trade-app
-COPY package.json .
-RUN npm install
+
+COPY package*.json ./
+
+RUN npm install --registry https://registry.npmmirror.com
+RUN npm install swagger-ui-express swagger-jsdoc --registry https://registry.npmmirror.com
+
 COPY . .
-CMD npm start
+
+EXPOSE 8080
+
+CMD ["npm", "start"]
