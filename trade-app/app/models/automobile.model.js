@@ -1,12 +1,11 @@
 module.exports = (sequelize, Sequelize) => {
   const Automobile = sequelize.define("automobile", {
-    modelCode: { type: Sequelize.INTEGER },
-    modelName: { type: Sequelize.STRING },
+    vin: { type: Sequelize.STRING },
     year: { type: Sequelize.INTEGER },
-    bodyType: { type: Sequelize.STRING },
-    brandCode: { type: Sequelize.STRING },
-    vin: { type: Sequelize.STRING }
-  });
+    color: { type: Sequelize.STRING },
+    price: { type: Sequelize.FLOAT },
+    modelId: { type: Sequelize.INTEGER }
+  }, { timestamps: false });
 
   return Automobile;
 };

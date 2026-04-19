@@ -1,12 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
   const Order = sequelize.define("order", {
-    orderNumber: { type: Sequelize.STRING },
-    clientCode: {  type: Sequelize.INTEGER},
-    priceListNumber: { type: Sequelize.STRING },
-    orderDate: { type: Sequelize.DATE },
-    totalAmount: { type: Sequelize.DECIMAL },
+    clientCode: { type: Sequelize.INTEGER },
+    clientId: { type: Sequelize.INTEGER },
     status: { type: Sequelize.STRING }
-  });
+  }, { timestamps: false });
 
   return Order;
 };

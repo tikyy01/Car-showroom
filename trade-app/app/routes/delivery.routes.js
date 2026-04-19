@@ -1,3 +1,19 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Delivery:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         city:
+ *           type: string
+ *         address:
+ *           type: string
+ *         orderId:
+ *           type: integer
+ */
 module.exports = app => {
   const controller = require("../controllers/delivery.controller");
   const router = require("express").Router();

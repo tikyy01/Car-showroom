@@ -1,3 +1,23 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Automobile:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         vin:
+ *           type: string
+ *         year:
+ *           type: integer
+ *         color:
+ *           type: string
+ *         price:
+ *           type: number
+ *         modelId:
+ *           type: integer
+ */
 module.exports = app => {
   const automobile = require("../controllers/automobile.controller");
   const router = require("express").Router();

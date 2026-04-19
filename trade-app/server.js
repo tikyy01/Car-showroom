@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
@@ -25,7 +26,7 @@ db.sequelize.sync()
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to trade-app application." });
 });
-require("dotenv").config();
+
 
 const PORT = process.env.PORT || 8080;
 
@@ -58,7 +59,7 @@ require("./app/routes/delivery.routes.js")(app);
 require("./app/routes/model.routes.js")(app);
 require("./app/routes/order.routes.js")(app);
 require("./app/routes/order-item.routes.js")(app);
-require("./app/routes/payment.routes.js")(app);
+// require("./app/routes/payment.routes.js")(app);
 require("./app/routes/price-list.routes.js")(app);
 require("./app/routes/price-list-item.routes.js")(app);
 

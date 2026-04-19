@@ -1,3 +1,20 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Model:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         modelCode:
+ *           type: integer
+ *         name:
+ *           type: string
+ *         brandId:
+ *           type: integer
+ */
+
 module.exports = app => {
   const controller = require("../controllers/model.controller");
   const router = require("express").Router();

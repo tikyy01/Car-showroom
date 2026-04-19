@@ -1,3 +1,17 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Brand:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         brandCode:
+ *           type: integer
+ *         name:
+ *           type: string
+ */
 module.exports = app => {
   const controller = require("../controllers/brand.controller");
   const router = require("express").Router();

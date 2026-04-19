@@ -1,8 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
   const PriceList = sequelize.define("priceList", {
-    priceListNumber: { type: Sequelize.INTEGER, },
-    creationDate: { type: Sequelize.DATE }
-  });
+    name: { type: Sequelize.STRING },
+    validFrom: { type: Sequelize.DATEONLY }
+  }, { timestamps: false });
 
   return PriceList;
 };

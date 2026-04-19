@@ -1,3 +1,19 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Order:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         clientCode:
+ *           type: integer
+ *         clientId:
+ *           type: integer
+ *         status:
+ *           type: string
+ */
 module.exports = app => {
   const controller = require("../controllers/order.controller");
   const router = require("express").Router();

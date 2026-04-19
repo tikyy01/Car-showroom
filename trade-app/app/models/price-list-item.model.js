@@ -1,10 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
   const PriceListItem = sequelize.define("priceListItem", {
-    vin: { type: Sequelize.INTEGER, },
-    priceListNumber: { type: Sequelize.INTEGER },
-    price: { type: Sequelize.DECIMAL },
-    discountPrice: { type: Sequelize.DECIMAL }
-  });
+    priceListId: { type: Sequelize.INTEGER },
+    automobileId: { type: Sequelize.INTEGER },
+    clientPrice: { type: Sequelize.FLOAT }
+  }, { timestamps: false });
 
   return PriceListItem;
 };

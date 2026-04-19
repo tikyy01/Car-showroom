@@ -8,13 +8,41 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  Order.findAll()
+  Order.findAll({
+    include: [
+      { model: db.client },
+      { 
+        model: db.orderItem,
+        include: [
+          { 
+            model: db.automobile,
+            include: [{ model: db.model, include: [db.brand] }]
+          }
+        ]
+      },
+      { model: db.delivery }
+    ]
+  })
     .then(data => res.send(data))
     .catch(err => res.status(500).send({ message: err.message }));
 };
 
 exports.findOne = (req, res) => {
-  Order.findByPk(req.params.id)
+  Order.findByPk(req.params.id, {
+    include: [
+      { model: db.client },
+      { 
+        model: db.orderItem,
+        include: [
+          { 
+            model: db.automobile,
+            include: [{ model: db.model, include: [db.brand] }]
+          }
+        ]
+      },
+      { model: db.delivery }
+    ]
+  })
     .then(data => data ? res.send(data) : res.status(404).send({ message: "Not found" }))
     .catch(err => res.status(500).send({ message: err.message }));
 };
