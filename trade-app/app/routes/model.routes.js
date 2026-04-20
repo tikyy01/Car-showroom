@@ -35,7 +35,7 @@ module.exports = app => {
    *               modelCode:
    *                 type: string
    *                 example: CAM40
-   *               brandCode:
+   *               brandId:
    *                 type: integer
    *                 example: 1
    *               name:
@@ -53,8 +53,16 @@ module.exports = app => {
    * @swagger
    * /api/models:
    *   get:
-   *     summary: Получить список всех моделей
+   *     summary: Получить список всех моделей (можно фильтровать по бренду)
    *     tags: [Models]
+   *     parameters:
+   *       - in: query
+   *         name: brandId
+   *         schema:
+   *           type: integer
+   *         required: false
+   *         description: ID бренда для фильтрации моделей
+   *         example: 1
    *     responses:
    *       200:
    *         description: Список моделей
@@ -81,14 +89,9 @@ module.exports = app => {
    *         required: true
    *         schema:
    *           type: integer
-   *         description: ID модели
    *     responses:
    *       200:
    *         description: Данные модели
-   *         content:
-   *           application/json:
-   *             schema:
-   *               $ref: '#/components/schemas/Model'
    *       404:
    *         description: Модель не найдена
    *       500:
@@ -108,7 +111,6 @@ module.exports = app => {
    *         required: true
    *         schema:
    *           type: integer
-   *         description: ID модели
    *     requestBody:
    *       required: true
    *       content:
@@ -118,15 +120,13 @@ module.exports = app => {
    *             properties:
    *               modelCode:
    *                 type: string
-   *               brandCode:
+   *               brandId:
    *                 type: integer
    *               name:
    *                 type: string
    *     responses:
    *       200:
    *         description: Модель успешно обновлена
-   *       404:
-   *         description: Модель не найдена
    *       500:
    *         description: Ошибка сервера
    */
@@ -144,12 +144,9 @@ module.exports = app => {
    *         required: true
    *         schema:
    *           type: integer
-   *         description: ID модели
    *     responses:
    *       200:
    *         description: Модель успешно удалена
-   *       404:
-   *         description: Модель не найдена
    *       500:
    *         description: Ошибка сервера
    */

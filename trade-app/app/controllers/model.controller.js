@@ -7,14 +7,22 @@ exports.create = (req, res) => {
     .catch(err => res.status(500).send({ message: err.message }));
 };
 
+// Если передан ?brandId=X — вернуть только модели этого бренда
 exports.findAll = (req, res) => {
-  Model.findAll()
+  const condition = req.query.brandId ? { brandId: req.query.brandId } : {};
+
+  Model.findAll({
+    where: condition,
+    include: [{ model: db.brand }]
+  })
     .then(data => res.send(data))
     .catch(err => res.status(500).send({ message: err.message }));
 };
 
 exports.findOne = (req, res) => {
-  Model.findByPk(req.params.id)
+  Model.findByPk(req.params.id, {
+    include: [{ model: db.brand }]
+  })
     .then(data => data ? res.send(data) : res.status(404).send({ message: "Not found" }))
     .catch(err => res.status(500).send({ message: err.message }));
 };
